@@ -19,7 +19,7 @@
       overflow-x: hidden;
     }
 
-    /* ===== BACKGROUND DOTS (slightly more visible) ===== */
+    /* ===== BACKGROUND DOTS ===== */
     body::before {
       content: "";
       position: fixed;
@@ -58,18 +58,31 @@
     }
 
     /* ===== HEADER ===== */
-<header>
-  <div class="logo">
-    <img src="https://cdn.discordapp.com/attachments/1444655862797832204/1444672891970129941/ChatGPT_Image_30_nov._2025_12_42_52.png?ex=69566e7a&is=69551cfa&hm=5f682c91cf21fcb52b9a91b1ee7d25e0f85b00b76787f0705f93d7eb0c868e4a&" alt="Vyn pp">
-    <span>Vyn</span>
-  </div>
-</header>
-
+    header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px 40px;
+      border-bottom: 1px solid #111;
+      background: rgba(0,0,0,0.65);
+      backdrop-filter: blur(6px);
+    }
 
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-size: 24px;
       font-weight: 800;
       letter-spacing: 1px;
+    }
+
+    .logo img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #222;
     }
 
     /* ===== HERO ===== */
@@ -169,20 +182,6 @@
       line-height: 1.5;
     }
 
-    /* ===== VIDEO ===== */
-    .video {
-      max-width: 1000px;
-      margin: 80px auto 120px;
-      padding: 0 20px;
-    }
-
-    video {
-      width: 100%;
-      border-radius: 16px;
-      border: 1px solid #111;
-      background: #000;
-    }
-
     /* ===== FOOTER ===== */
     footer {
       text-align: center;
@@ -197,7 +196,10 @@
 <body>
 
 <header>
-  <div class="logo">Vyn</div>
+  <div class="logo">
+    <img src="https://cdn.discordapp.com/attachments/1444655862797832204/1444672891970129941/ChatGPT_Image_30_nov._2025_12_42_52.png?ex=69566e7a&is=69551cfa&hm=5f682c91cf21fcb52b9a91b1ee7d25e0f85b00b76787f0705f93d7eb0c868e4a" alt="Vyn">
+    <span>Vyn</span>
+  </div>
 </header>
 
 <section class="hero">
@@ -237,7 +239,6 @@
     <p>Clean, safe, and trusted by the community.</p>
   </div>
 </section>
-
 
 <footer>
   © 2025 Vyn All rights reserved.
