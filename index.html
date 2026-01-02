@@ -3,246 +3,357 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vyn</title>
-
+  <title>Muha Executor</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    :root {
+      --red: #ff2e2e;
+      --dark: #0b0b10;
+      --dark-2: #14141c;
+      --text: #f5f5f7;
+      --muted: #b5b5c0;
     }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Inter, Arial, sans-serif; }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #000;
-      color: #fff;
-      overflow-x: hidden;
+      background: radial-gradient(1200px 600px at 70% 20%, rgba(255,46,46,0.25), transparent 60%),
+                  radial-gradient(800px 400px at 20% 80%, rgba(255,46,46,0.2), transparent 60%),
+                  var(--dark);
+      color: var(--text);
     }
 
-    /* ===== BACKGROUND DOTS ===== */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: radial-gradient(
-        rgba(255,255,255,0.12) 1px,
-        transparent 1px
-      );
-      background-size: 24px 24px;
-      z-index: -1;
-      opacity: 0.75;
-      animation: moveDots 90s linear infinite;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: radial-gradient(
-        rgba(255,0,0,0.18) 1px,
-        transparent 1px
-      );
-      background-size: 100px 100px;
-      z-index: -2;
-      opacity: 0.3;
-    }
-
-    @keyframes moveDots {
-      from { background-position: 0 0; }
-      to { background-position: 300px 300px; }
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    /* ===== HEADER ===== */
     header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      padding: 20px 40px;
-      border-bottom: 1px solid #111;
-      background: rgba(0,0,0,0.65);
-      backdrop-filter: blur(6px);
+      padding: 18px 64px;
+      background: rgba(11,11,16,0.75);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
     }
 
-    .logo {
+    header .logo {
       display: flex;
       align-items: center;
       gap: 12px;
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: 1px;
+      font-weight: 700;
+      font-size: 20px;
+      color: var(--red);
     }
 
-    .logo img {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 1px solid #222;
+    header nav a {
+      color: var(--muted);
+      text-decoration: none;
+      margin-left: 24px;
+      font-weight: 500;
+      position: relative;
     }
 
-    /* ===== HERO ===== */
+    header nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      background: var(--red);
+      transition: width .25s ease;
+    }
+
+    header nav a:hover::after { width: 100%; }
+    header nav a:hover { color: var(--text); }
+
+    header nav a.button {
+      background: linear-gradient(135deg, #ff4d4d, #ff1f1f);
+      color: white;
+      padding: 10px 18px;
+      border-radius: 999px;
+    }
+
     .hero {
-      text-align: center;
-      padding: 120px 20px 80px;
-      max-width: 1100px;
-      margin: auto;
-    }
-
-    .badge {
-      display: inline-block;
-      background: #2a0000;
-      color: #ff0000;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      margin-bottom: 30px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      padding: 80px 64px;
+      align-items: center;
     }
 
     .hero h1 {
-      font-size: 48px;
-      font-weight: 800;
-      margin-bottom: 20px;
+      font-size: 56px;
+      line-height: 1.05;
+      margin-bottom: 16px;
     }
+
+    .hero h1 span { color: var(--red); }
 
     .hero p {
-      color: #aaa;
-      max-width: 600px;
-      margin: 0 auto 40px;
-      line-height: 1.6;
+      color: var(--muted);
+      max-width: 520px;
+      margin-bottom: 32px;
+      font-size: 18px;
     }
 
-    .buttons {
+    .download-area {
       display: flex;
-      justify-content: center;
       gap: 16px;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
+      align-items: center;
     }
 
     .btn {
-      padding: 12px 22px;
-      border-radius: 10px;
+      background: linear-gradient(135deg, #ff4d4d, #ff1f1f);
+      border: none;
+      color: white;
+      padding: 14px 28px;
+      border-radius: 14px;
+      font-size: 16px;
       font-weight: 600;
-      font-size: 14px;
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease;
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      opacity: 0.9;
+    .btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(300px circle at var(--bx, 50%) var(--by, 50%), rgba(255,255,255,0.35), transparent 40%);
+      opacity: 0;
+      transition: opacity .25s ease;
+      pointer-events: none;
     }
 
-    .btn.primary {
-      background: #fff;
-      color: #000;
-    }
+    .btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 30px rgba(255,46,46,0.45); }
+    .btn:hover::after { opacity: 1; }
+    .btn:active { transform: scale(0.98); }
 
     .btn.secondary {
-      background: #360101;
-      border: 1px solid #222;
-      color: #fff;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
     }
 
-    .os {
-      margin-top: 10px;
-      font-size: 13px;
-      color: #777;
+    .download-options {
+      margin-top: 20px;
+      display: none;
+      gap: 16px;
     }
 
-    /* ===== FEATURES ===== */
-    .features {
-      background: rgba(11,11,11,0.9);
-      border: 1px solid #111;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      padding: 40px;
-      max-width: 1200px;
-      margin: 60px auto;
+    .card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), rgba(255,46,46,0.25), transparent 40%);
+      opacity: 0;
+      transition: opacity .3s ease;
+      pointer-events: none;
+    }
+
+    .card:hover::before { opacity: 1; }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(255,46,46,0.25); }
+
+    .preview img {
+      width: 100%;
       border-radius: 16px;
-      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.15);
     }
 
-    .feature h3 {
-      margin-bottom: 10px;
+    .badges {
+      display: flex;
+      gap: 10px;
+      margin-top: 16px;
+      flex-wrap: wrap;
     }
 
-    .feature p {
-      color: #aaa;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 40px;
+    .badge {
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,46,46,0.15);
+      border: 1px solid rgba(255,46,46,0.4);
       font-size: 13px;
-      color: #555;
-      border-top: 1px solid #111;
+      color: #ffdada;
+    }
+
+    section.features {
+      padding: 80px 64px;
+    }
+
+    section.features h2 {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    section.features p {
+      color: var(--muted);
+      margin-bottom: 40px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+    }
+
+    footer {
+      padding: 40px 64px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+    }
+
+    .faq-item .faq-answer {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height .35s ease, opacity .35s ease;
+      margin-top: 10px;
+      color: var(--muted);
+    }
+
+    .faq-item:hover .faq-answer {
+      max-height: 200px;
+      opacity: 1;
+    }
+
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; }
+      header { padding: 24px; }
+      .hero, section.features { padding: 48px 24px; }
     }
   </style>
 </head>
-
 <body>
 
-<header>
-  <div class="logo">
-    <img src="https://cdn.discordapp.com/attachments/1444655862797832204/1444672891970129941/ChatGPT_Image_30_nov._2025_12_42_52.png?ex=69566e7a&is=69551cfa&hm=5f682c91cf21fcb52b9a91b1ee7d25e0f85b00b76787f0705f93d7eb0c868e4a" alt="Vyn">
-    <span>Vyn</span>
-  </div>
-</header>
+  <header>
+    <div class="logo">
+      <img src="https://cdn.discordapp.com/attachments/000000000000000000/000000000000000000/logo.png" alt="logo" width="36" />
+      Muha Executor
+    </div>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#" class="button">Get Muha</a>
+    </nav>
+  </header>
 
-<section class="hero">
-  <div class="badge">📍 Join the Discord for more exploit →</div>
+  <main class="hero">
+    <div>
+      <h1>Execute faster with <span>Muha Executor</span>.</h1>
+      <p>100% keyless and free Lua executor — fast, lightweight, and clean. Optimized for maximum performance.</p>
 
-  <h1>Vyn, The #1 External of Roblox.</h1>
+      <div class="download-area">
+        <button class="btn" onclick="toggleDownloads()">Download</button>
+        <button class="btn secondary">Discord</button>
+      </div>
 
-  <p>
-    Fast, powerful, and built to stay undetected.
-  </p>
+      <div id="downloads" class="download-options">
+        <button class="btn" onclick="window.location.href='https://example.com/link1'">Download Beta</button>
+        <button class="btn secondary" onclick="window.location.href='https://example.com/link2'">Download Stable</button>
+      </div>
+    </div>
 
-  <div class="buttons">
-    <a class="btn primary" href="tesy" target="_blank">
-      Download now →
-    </a>
-    <a class="btn secondary" href="https://discord.gg/3TcCgSF4uq" target="_blank">
-      Join Discord
-    </a>
-  </div>
+    <div class="card preview">
+      <img src="https://cdn.discordapp.com/attachments/000000000000000000/000000000000000000/preview.png" alt="preview" />
+      <div class="badges">
+        <div class="badge">Lua</div>
+        <div class="badge">Fast UI</div>
+        <div class="badge">Lightweight</div>
+        <div class="badge">Discord Support</div>
+      </div>
+    </div>
+  </main>
 
-  <div class="os">Works only on Windows 10 / 11</div>
-</section>
+  <section id="features" class="features">
+    <h2>Key Features</h2>
+    <p>Built for speed, stability, and instant Lua execution.</p>
 
-<section class="features">
-  <div class="feature">
-    <h3>⚡ Undetected</h3>
-    <p>Works on most games with high stability.</p>
-  </div>
+    <div class="feature-grid">
+      <div class="card">⚡ Fast and stable execution</div>
+      <div class="card">🔓 100% Keyless</div>
+      <div class="card">🎨 Modern red-themed interface</div>
+      <div class="card">🧠 Low resource usage</div>
+    </div>
+  </section>
 
-  <div class="feature">
-    <h3>🛠 Powerful</h3>
-    <p>Advanced features designed for performance.</p>
-  </div>
+  <section id="about" class="features">
+    <h2>About Muha Executor</h2>
+    <p>Muha Executor is a modern, lightweight, and high-performance Lua executor designed for speed, stability, and ease of use.</p>
 
-  <div class="feature">
-    <h3>🦠 No Virus</h3>
-    <p>Clean, safe, and trusted by the community.</p>
-  </div>
-</section>
+    <div class="feature-grid">
+      <div class="card">🚀 Built for fast script execution with minimal delay</div>
+      <div class="card">🧩 Clean and simple user interface</div>
+      <div class="card">🔒 Keyless system – no ads, no waiting</div>
+      <div class="card">👨‍💻 Actively developed and maintained</div>
+    </div>
+  </section>
 
-<footer>
-  © 2025 Vyn All rights reserved.
-</footer>
+  <section id="faq" class="features">
+    <h2>Frequently Asked Questions</h2>
+    <p>Hover over a question to reveal the answer.</p>
+
+    <div class="feature-grid faq-grid">
+      <div class="card faq-item">
+        <strong>Is Muha Executor free?</strong>
+        <div class="faq-answer">Yes. Muha Executor is completely free and does not require any key system.</div>
+      </div>
+
+      <div class="card faq-item">
+        <strong>Is it safe to use?</strong>
+        <div class="faq-answer">Muha Executor is designed with stability and safety in mind. Always download from official links.</div>
+      </div>
+
+      <div class="card faq-item">
+        <strong>Does it support most Lua scripts?</strong>
+        <div class="faq-answer">Yes, it supports the majority of commonly used Lua scripts.</div>
+      </div>
+
+      <div class="card faq-item">
+        <strong>Where can I get support?</strong>
+        <div class="faq-answer">You can join our Discord server for updates, announcements, and support.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Muha Executor — All rights reserved
+  </footer>
+
+  <script>
+    function toggleDownloads() {
+      const el = document.getElementById('downloads');
+      el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
+    }
+    document.querySelectorAll('.card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--y', `${e.clientY - rect.top}px`);
+      });
+    });
+      document.querySelectorAll('.btn').forEach(btn => {
+      btn.addEventListener('mousemove', e => {
+        const rect = btn.getBoundingClientRect();
+        btn.style.setProperty('--bx', `${e.clientX - rect.left}px`);
+        btn.style.setProperty('--by', `${e.clientY - rect.top}px`);
+      });
+    });
+  </script>
 
 </body>
 </html>
