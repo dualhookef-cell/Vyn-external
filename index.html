@@ -1,359 +1,258 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vyn External</title>
-  <style>
-    :root {
-      --red: #ff2e2e;
-      --dark: #0b0b10;
-      --dark-2: #14141c;
-      --text: #f5f5f7;
-      --muted: #b5b5c0;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vyn External</title>
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Inter, Arial, sans-serif; }
+<style>
+:root{
+  --red:#ff2e2e;
+  --dark:#0b0b10;
+  --dark-2:#14141c;
+  --text:#f5f5f7;
+  --muted:#b5b5c0;
+}
 
-    html { scroll-behavior: smooth; }
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,Arial,sans-serif;}
+html{scroll-behavior:smooth;}
 
-    body {
-      background: radial-gradient(1200px 600px at 70% 20%, rgba(255,46,46,0.25), transparent 60%),
-                  radial-gradient(800px 400px at 20% 80%, rgba(255,46,46,0.2), transparent 60%),
-                  var(--dark);
-      color: var(--text);
-    }
+body{
+  background:
+  radial-gradient(1200px 600px at 70% 20%, rgba(255,46,46,.25), transparent 60%),
+  radial-gradient(800px 400px at 20% 80%, rgba(255,46,46,.2), transparent 60%),
+  var(--dark);
+  color:var(--text);
+}
 
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 18px 64px;
-      background: rgba(11,11,16,0.75);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
+/* ===== GLOW ANIMATION ===== */
+@keyframes glow {
+  0% {
+    text-shadow:
+      0 0 10px rgba(255,46,46,.5),
+      0 0 20px rgba(255,46,46,.4),
+      0 0 40px rgba(255,46,46,.3);
+  }
+  50% {
+    text-shadow:
+      0 0 20px rgba(255,46,46,.9),
+      0 0 40px rgba(255,46,46,.8),
+      0 0 80px rgba(255,46,46,.6);
+  }
+  100% {
+    text-shadow:
+      0 0 10px rgba(255,46,46,.5),
+      0 0 20px rgba(255,46,46,.4),
+      0 0 40px rgba(255,46,46,.3);
+  }
+}
 
-    header .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-weight: 700;
-      font-size: 20px;
-      color: var(--red);
-    }
+.glow {
+  color: var(--red);
+  animation: glow 2.5s infinite ease-in-out;
+}
 
-    header nav a {
-      color: var(--muted);
-      text-decoration: none;
-      margin-left: 24px;
-      font-weight: 500;
-      position: relative;
-    }
+/* ===== HEADER ===== */
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 64px;
+  background:rgba(11,11,16,.75);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+}
 
-    header nav a::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: -6px;
-      width: 0;
-      height: 2px;
-      background: var(--red);
-      transition: width .25s ease;
-    }
+.logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:20px;
+  font-weight:700;
+}
 
-    header nav a:hover::after { width: 100%; }
-    header nav a:hover { color: var(--text); }
+nav a{
+  color:var(--muted);
+  text-decoration:none;
+  margin-left:24px;
+  font-weight:500;
+  position:relative;
+}
 
-    header nav a.button {
-      background: linear-gradient(135deg, #ff4d4d, #ff1f1f);
-      color: white;
-      padding: 10px 18px;
-      border-radius: 999px;
-    }
+nav a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-6px;
+  width:0;
+  height:2px;
+  background:var(--red);
+  transition:.25s;
+}
 
-    .hero {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: 48px;
-      padding: 80px 64px;
-      align-items: center;
-    }
+nav a:hover::after{width:100%;}
+nav a:hover{color:var(--text);}
 
-    .hero h1 {
-      font-size: 56px;
-      line-height: 1.05;
-      margin-bottom: 16px;
-    }
+nav a.button{
+  background:linear-gradient(135deg,#ff4d4d,#ff1f1f);
+  color:#fff;
+  padding:10px 18px;
+  border-radius:999px;
+}
 
-    .hero h1 span { color: var(--red); }
+/* ===== HERO ===== */
+.hero{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:48px;
+  padding:80px 64px;
+  align-items:center;
+}
 
-    .hero p {
-      color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 32px;
-      font-size: 18px;
-    }
+.hero h1{
+  font-size:56px;
+  line-height:1.05;
+  margin-bottom:16px;
+}
 
-    .download-area {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
+.hero p{
+  color:var(--muted);
+  max-width:520px;
+  font-size:18px;
+  margin-bottom:32px;
+}
 
-    .btn {
-      background: linear-gradient(135deg, #ff4d4d, #ff1f1f);
-      border: none;
-      color: white;
-      padding: 14px 28px;
-      border-radius: 14px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
+/* ===== BUTTONS ===== */
+.download-area{display:flex;gap:16px;}
 
-    .btn::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(300px circle at var(--bx, 50%) var(--by, 50%), rgba(255,255,255,0.35), transparent 40%);
-      opacity: 0;
-      transition: opacity .25s ease;
-      pointer-events: none;
-    }
+.btn{
+  background:linear-gradient(135deg,#ff4d4d,#ff1f1f);
+  border:none;
+  color:#fff;
+  padding:14px 28px;
+  border-radius:14px;
+  font-size:16px;
+  font-weight:600;
+  cursor:pointer;
+  transition:.2s;
+}
 
-    .btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 10px 30px rgba(255,46,46,0.45); }
-    .btn:hover::after { opacity: 1; }
-    .btn:active { transform: scale(0.98); }
+.btn:hover{
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 10px 30px rgba(255,46,46,.45);
+}
 
-    .btn.secondary {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.15);
-    }
+.btn.secondary{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.15);
+}
 
-    .download-options {
-      margin-top: 20px;
-      display: none;
-      gap: 16px;
-    }
+/* ===== DOWNLOAD ===== */
+.download-options{
+  display:none;
+  margin-top:20px;
+  gap:16px;
+}
 
-    .card {
-      position: relative;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 20px;
-      padding: 24px;
-      backdrop-filter: blur(12px);
-      overflow: hidden;
-      transition: transform .25s ease, box-shadow .25s ease;
-    }
+/* ===== CARDS ===== */
+.card{
+  background:linear-gradient(180deg,rgba(255,255,255,.08),rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  padding:24px;
+  backdrop-filter:blur(12px);
+  transition:.25s;
+}
 
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), rgba(255,46,46,0.25), transparent 40%);
-      opacity: 0;
-      transition: opacity .3s ease;
-      pointer-events: none;
-    }
+.card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 20px 60px rgba(255,46,46,.25);
+}
 
-    .card:hover::before { opacity: 1; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(255,46,46,0.25); }
+/* ===== SECTIONS ===== */
+.features{padding:80px 64px;}
+.features h2{font-size:36px;margin-bottom:12px;}
+.features p{color:var(--muted);margin-bottom:40px;}
 
-    .preview img {
-      width: 100%;
-      border-radius: 16px;
-      border: 1px solid rgba(255,255,255,0.15);
-    }
+.feature-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:24px;
+}
 
-    .badges {
-      display: flex;
-      gap: 10px;
-      margin-top: 16px;
-      flex-wrap: wrap;
-    }
+/* ===== FOOTER ===== */
+footer{
+  padding:40px 64px;
+  color:var(--muted);
+  border-top:1px solid rgba(255,255,255,.1);
+  text-align:center;
+}
 
-    .badge {
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(255,46,46,0.15);
-      border: 1px solid rgba(255,46,46,0.4);
-      font-size: 13px;
-      color: #ffdada;
-    }
-
-    section.features {
-      padding: 80px 64px;
-    }
-
-    section.features h2 {
-      font-size: 36px;
-      margin-bottom: 12px;
-    }
-
-    section.features p {
-      color: var(--muted);
-      margin-bottom: 40px;
-    }
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 24px;
-    }
-
-    footer {
-      padding: 40px 64px;
-      color: var(--muted);
-      border-top: 1px solid rgba(255,255,255,0.1);
-      text-align: center;
-    }
-
-    .faq-item .faq-answer {
-      max-height: 0;
-      opacity: 0;
-      overflow: hidden;
-      transition: max-height .35s ease, opacity .35s ease;
-      margin-top: 10px;
-      color: var(--muted);
-    }
-
-    .faq-item:hover .faq-answer {
-      max-height: 200px;
-      opacity: 1;
-    }
-
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; }
-      header { padding: 24px; }
-      .hero, section.features { padding: 48px 24px; }
-    }
-  </style>
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;}
+  header{padding:24px;}
+  .hero,.features{padding:48px 24px;}
+}
+</style>
 </head>
+
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="https://cdn.discordapp.com/attachments/000000000000000000/000000000000000000/logo.png" alt="logo" width="36" />
-      Vyn External
-    </div>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#about">About</a>
-      <a href="#faq">FAQ</a>
-      <a href="#" class="button">Get Vyn</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">
+    <span class="glow">Vyn External</span>
+  </div>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#about">About</a>
+    <a href="#faq">FAQ</a>
+    <a href="#" class="button">Get Vyn</a>
+  </nav>
+</header>
 
-  <main class="hero">
-    <div>
-      <h1>Execute faster with <span>Vyn External</span>.</h1>
-      <p>100% keyless and free  External — fast, lightweight, and clean. Optimized for maximum performance.</p>
+<main class="hero">
+  <div>
+    <h1>Execute faster with <span class="glow">Vyn External</span>.</h1>
+    <p>100% keyless and free External — fast, lightweight, and clean.</p>
 
-      <div class="download-area">
-        <button class="btn" onclick="toggleDownloads()">Download</button>
-        <button class="btn secondary">Discord</button>
-      </div>
-
-      <div id="downloads" class="download-options">
-        <button class="btn" onclick="window.location.href='https://example.com/link1'">Linkvertise</button>
-        <button class="btn secondary" onclick="window.location.href='https://example.com/link2'">Work Ink</button>
-      </div>
+    <div class="download-area">
+      <button class="btn" onclick="toggleDownloads()">Download</button>
+      <button class="btn secondary" onclick="location.href='#discord'">Discord</button>
     </div>
 
-    <div class="card preview">
-      <img src="https://cdn.discordapp.com/attachments/1444655862797832204/1456595916860428382/Vyn_gkikvbJAJt.png?ex=6958f028&is=69579ea8&hm=5ee156f4b26354346fc616e5f8d6bf1c279544a50e89b5e5891ae9cbab46e5cd" alt="preview" />
-      <div class="badges">
-        <div class="badge">External</div>
-        <div class="badge">Fast UI</div>
-        <div class="badge">Lightweight</div>
-        <div class="badge">Discord Support</div>
-      </div>
+    <div id="downloads" class="download-options">
+      <button class="btn">Linkvertise</button>
+      <button class="btn secondary">Work Ink</button>
     </div>
-  </main>
+  </div>
 
-  <section id="features" class="features">
-    <h2>Features</h2>
-    <p>Built for speed, stability, and instant load.</p>
+  <div class="card">
+    <img src="https://cdn.discordapp.com/attachments/1444655862797832204/1456595916860428382/Vyn_gkikvbJAJt.png" width="100%" style="border-radius:16px;">
+  </div>
+</main>
 
-    <div class="feature-grid">
-      <div class="card">⚡ Fast and stable load</div>
-      <div class="card">🔓 100% Keyless</div>
-      <div class="card">🎨 Modern red-themed interface</div>
-      <div class="card">🧠 Low resource usage</div>
-    </div>
-  </section>
+<section id="discord" class="features">
+  <h2>Join our Discord</h2>
+  <p>Support, updates, and announcements.</p>
+  <div class="card" style="padding:0;">
+    <iframe src="https://discord.com/widget?id=TON_SERVER_ID&theme=dark"
+      width="100%" height="500" frameborder="0"
+      sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+    </iframe>
+  </div>
+</section>
 
-  <section id="about" class="features">
-    <h2>About Vyn External</h2>
-    <p>Vyn External is a modern, lightweight, and high-performance External designed for speed, stability, and easy to use.</p>
+<footer>© 2026 Vyn External — All rights reserved</footer>
 
-    <div class="feature-grid">
-      <div class="card">🚀 Built for fast script execution with minimal delay</div>
-      <div class="card">🧩 Clean and simple user interface</div>
-      <div class="card">🔒 Keyless system – no ads, no waiting</div>
-      <div class="card">👨‍💻 Actively developed and maintained</div>
-    </div>
-  </section>
-
-  <section id="faq" class="features">
-    <h2>Frequently Asked Questions</h2>
-    <p>Hover over a question to reveal the answer.</p>
-
-    <div class="feature-grid faq-grid">
-      <div class="card faq-item">
-        <strong>Is Vyn External free?</strong>
-        <div class="faq-answer">Yes. Vyn External is completely free and does not require any key system.</div>
-      </div>
-
-      <div class="card faq-item">
-        <strong>Is it safe to use?</strong>
-        <div class="faq-answer">Vyn External is designed with stability and safety in mind. Always download from official links.</div>
-      </div>
-
-      <div class="card faq-item">
-        <strong>How to open it?</strong>
-        <div class="faq-answer">Just click on your keyboard insert.</div>
-      </div>
-
-      <div class="card faq-item">
-        <strong>Where can I get support?</strong>
-        <div class="faq-answer">You can join our Discord server for updates, announcements, and support.</div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    © 2026 Vyn External — All rights reserved
-  </footer>
-
-  <script>
-    function toggleDownloads() {
-      const el = document.getElementById('downloads');
-      el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
-    }
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--x', `${e.clientX - rect.left}px`);
-        card.style.setProperty('--y', `${e.clientY - rect.top}px`);
-      });
-    });
-      document.querySelectorAll('.btn').forEach(btn => {
-      btn.addEventListener('mousemove', e => {
-        const rect = btn.getBoundingClientRect();
-        btn.style.setProperty('--bx', `${e.clientX - rect.left}px`);
-        btn.style.setProperty('--by', `${e.clientY - rect.top}px`);
-      });
-    });
-  </script>
+<script>
+function toggleDownloads(){
+  const el=document.getElementById('downloads');
+  el.style.display=el.style.display==='flex'?'none':'flex';
+}
+</script>
 
 </body>
 </html>
