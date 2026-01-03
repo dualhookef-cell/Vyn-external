@@ -4,23 +4,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Vyn External</title>
+
   <style>
     :root {
-      --red: #ff2e2e;
+      --white: #ffffff;
       --dark: #0b0b10;
       --dark-2: #14141c;
       --text: #f5f5f7;
       --muted: #b5b5c0;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: Inter, Arial, sans-serif; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Inter, Arial, sans-serif;
+    }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: radial-gradient(1200px 600px at 70% 20%, rgba(255,46,46,0.25), transparent 60%),
-                  radial-gradient(800px 400px at 20% 80%, rgba(255,46,46,0.2), transparent 60%),
-                  var(--dark);
+      background:
+        radial-gradient(1200px 600px at 70% 20%, rgba(255,255,255,0.15), transparent 60%),
+        radial-gradient(800px 400px at 20% 80%, rgba(255,255,255,0.1), transparent 60%),
+        var(--dark);
       color: var(--text);
     }
 
@@ -43,7 +50,7 @@
       gap: 12px;
       font-weight: 700;
       font-size: 20px;
-      color: var(--red);
+      color: var(--white);
     }
 
     header nav a {
@@ -54,8 +61,8 @@
     }
 
     header nav a.button {
-      background: linear-gradient(135deg, #ff4d4d, #ff1f1f);
-      color: white;
+      background: linear-gradient(135deg, #ffffff, #dcdcdc);
+      color: #000;
       padding: 10px 18px;
       border-radius: 999px;
     }
@@ -74,7 +81,7 @@
       margin-bottom: 16px;
     }
 
-    .hero h1 span { color: var(--red); }
+    .hero h1 span { color: var(--white); }
 
     .hero p {
       color: var(--muted);
@@ -90,9 +97,9 @@
     }
 
     .btn {
-      background: linear-gradient(135deg, #ff4d4d, #ff1f1f);
+      background: linear-gradient(135deg, #ffffff, #dcdcdc);
       border: none;
-      color: white;
+      color: #000;
       padding: 14px 28px;
       border-radius: 14px;
       font-size: 16px;
@@ -102,7 +109,8 @@
 
     .btn.secondary {
       background: transparent;
-      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.25);
     }
 
     .download-options {
@@ -126,14 +134,21 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(400px circle at var(--x, 50%) var(--y, 50%), rgba(255,46,46,0.25), transparent 40%);
+      background: radial-gradient(
+        400px circle at var(--x, 50%) var(--y, 50%),
+        rgba(255,255,255,0.25),
+        transparent 40%
+      );
       opacity: 0;
       transition: opacity .3s ease;
       pointer-events: none;
     }
 
     .card:hover::before { opacity: 1; }
-    .card:hover { transform: translateY(-4px); box-shadow: 0 20px 60px rgba(255,46,46,0.25); }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(255,255,255,0.25);
+    }
 
     .preview img {
       width: 100%;
@@ -151,10 +166,10 @@
     .badge {
       padding: 6px 12px;
       border-radius: 999px;
-      background: rgba(255,46,46,0.15);
-      border: 1px solid rgba(255,46,46,0.4);
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.4);
       font-size: 13px;
-      color: #ffdada;
+      color: #fff;
     }
 
     section.features {
@@ -205,119 +220,69 @@
     }
   </style>
 </head>
+
 <body>
 
-  <header>
-    <div class="logo">
-      <img src="https://cdn.discordapp.com/attachments/000000000000000000/000000000000000000/logo.png" alt="logo" width="36" />
-      Vyn External
-    </div>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#about">About</a>
-      <a href="#faq">FAQ</a>
-      <a href="#" class="button">Get Vyn</a>
-    </nav>
-  </header>
+<header>
+  <div class="logo">
+    <img src="https://cdn.discordapp.com/attachments/000000000000000000/000000000000000000/logo.png" width="36">
+    Vyn External
+  </div>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#about">About</a>
+    <a href="#faq">FAQ</a>
+    <a href="#" class="button">Get Vyn</a>
+  </nav>
+</header>
 
-  <main class="hero">
-    <div>
-      <h1>Cheat faster with <span>Vyn External</span>.</h1>
-      <p>100% keyless & free  External — Fast - Never get ban with vyn.</p>
+<main class="hero">
+  <div>
+    <h1>Cheat faster with <span>Vyn External</span>.</h1>
+    <p>100% keyless & free External — Fast - Never get ban with vyn.</p>
 
-      <div class="download-area">
-        <button class="btn" onclick="toggleDownloads()">Download</button>
-        <a href="https://discord.gg/TONLIEN" target="_blank">
-  <button class="btn secondary">Discord</button>
-</a>
-
-      </div>
-
-      <div id="downloads" class="download-options">
-        <button class="btn" onclick="window.location.href='https://example.com/link1'">Download Beta</button>
-        <button class="btn secondary" onclick="window.location.href='https://example.com/link2'">Download Stable</button>
-      </div>
+    <div class="download-area">
+      <button class="btn" onclick="toggleDownloads()">Download</button>
+      <a href="https://discord.gg/TONLIEN" target="_blank">
+        <button class="btn secondary">Discord</button>
+      </a>
     </div>
 
-    <div class="card preview">
-      <img src="https://cdn.discordapp.com/attachments/1444655862797832204/1456595916860428382/Vyn_gkikvbJAJt.png?ex=6958f028&is=69579ea8&hm=5ee156f4b26354346fc616e5f8d6bf1c279544a50e89b5e5891ae9cbab46e5cd" alt="preview" />
-      <div class="badges">
-        <div class="badge">External</div>
-        <div class="badge">Fast UI</div>
-        <div class="badge">Lightweight</div>
-        <div class="badge">Discord Support</div>
-      </div>
+    <div id="downloads" class="download-options">
+      <button class="btn">Download Beta</button>
+      <button class="btn secondary">Download Stable</button>
     </div>
-  </main>
+  </div>
 
-  <section id="features" class="features">
-    <h2>Features</h2>
-    <p>Build by cheaters for cheaters.</p>
-
-    <div class="feature-grid">
-      <div class="card">⚡ Fast</div>
-      <div class="card">🔓 100% Keyless</div>
-      <div class="card">🎨 Simple ui Red/div>
-      <div class="card">🧠 Easy to use/div>
+  <div class="card preview">
+    <img src="https://cdn.discordapp.com/attachments/1444655862797832204/1456595916860428382/Vyn_gkikvbJAJt.png">
+    <div class="badges">
+      <div class="badge">External</div>
+      <div class="badge">Fast UI</div>
+      <div class="badge">Lightweight</div>
+      <div class="badge">Discord Support</div>
     </div>
-  </section>
+  </div>
+</main>
 
-  <section id="about" class="features">
-    <h2>About Vyn External</h2>
-    <p>Vyn External is a modern, lightweight, and high-performance  External designed for speed, stability, and ease of use.</p>
+<footer>
+  © 2026 Vyn External — Tous droits réservés
+</footer>
 
-    <div class="feature-grid">
-      <div class="card">🚀 Built for fast cheat with minimal delay</div>
-      <div class="card">🧩 Clean and simple user interface</div>
-      <div class="card">🔒 Keyless system – no ads, no waiting</div>
-      <div class="card">👨‍💻 Actively developed and maintained</div>
-    </div>
-  </section>
+<script>
+  function toggleDownloads() {
+    const el = document.getElementById('downloads');
+    el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
+  }
 
-  <section id="faq" class="features">
-    <h2>Frequently Asked Questions</h2>
-    <p>Hover over a question to reveal the answer.</p>
-
-    <div class="feature-grid faq-grid">
-      <div class="card faq-item">
-        <strong>Is Vyn External free?</strong>
-        <div class="faq-answer">Yes. Vyn External is completely free and does not require any key system.</div>
-      </div>
-
-      <div class="card faq-item">
-        <strong>Is it safe to use?</strong>
-        <div class="faq-answer">Vyn External is designed with stability and safety in mind. Always download from official links.</div>
-      </div>
-
-      <div class="card faq-item">
-        <strong>How open the ui?</strong>
-        <div class="faq-answer">Click on your keyboard insert.</div>
-      </div>
-
-      <div class="card faq-item">
-        <strong>Where can I get support?</strong>
-        <div class="faq-answer">You can join our Discord server for updates, announcements, and support.</div>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    © 2026 Vyn External — Tous droits réservés
-  </footer>
-
-  <script>
-    function toggleDownloads() {
-      const el = document.getElementById('downloads');
-      el.style.display = el.style.display === 'flex' ? 'none' : 'flex';
-    }
-    document.querySelectorAll('.card').forEach(card => {
-      card.addEventListener('mousemove', e => {
-        const rect = card.getBoundingClientRect();
-        card.style.setProperty('--x', `${e.clientX - rect.left}px`);
-        card.style.setProperty('--y', `${e.clientY - rect.top}px`);
-      });
+  document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect = card.getBoundingClientRect();
+      card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+      card.style.setProperty('--y', `${e.clientY - rect.top}px`);
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
